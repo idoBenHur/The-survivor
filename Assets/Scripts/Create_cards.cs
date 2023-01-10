@@ -14,7 +14,7 @@ public class Create_cards : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.childCount < 2)
+        if (transform.childCount < 3)
         {
             InstantiateCard();
         }

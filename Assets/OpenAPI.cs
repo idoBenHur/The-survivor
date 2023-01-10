@@ -17,7 +17,7 @@ public class OpenAPI : MonoBehaviour
     {
         Debug.Log("running..");
 
-        var apikey = "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";
+        var apikey = "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";
 
         try
         {

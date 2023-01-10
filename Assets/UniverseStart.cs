@@ -6,6 +6,8 @@ using System.Net.NetworkInformation;
 using System.Threading;
 using System.Threading.Tasks;
 using System.IO;
+using UnityEngine.UI;
+
 namespace Universe
 {
 
@@ -22,9 +24,9 @@ namespace Universe
     {
         //const string pathPrefix = @"D:\_misc\";
 
-        Cache.rootFolder = @"C:\Users\ASUS\Desktop\ido 6\Assets\Cache";
+        Cache.rootFolder = @"C:\Users\Ido Ben-Hur\Unity projects\The survivor\Assets\Cache";
 
-        string openAIKey = "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";
+        string openAIKey = "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";
         TextAI.key  = openAIKey;
         CoroutineVariant.TextAI.key = openAIKey;
         ImageAIDallE.key = openAIKey;
@@ -102,30 +104,30 @@ namespace Universe
         Debug.Log("b: " + b);
     }
 
-    void TestImageAI()
-    {
-        ImageAI imageAI = Misc.GetAddComponent<ImageAI>(gameObject);
-
-        string prompt = "person on mountain, minimalist 3d";
-        Debug.Log("Sending prompt " + prompt);
-
-        StartCoroutine(
-            imageAI.GetImage(prompt, (Texture2D texture) =>
-            {
-                Debug.Log("Done.");
-                Renderer renderer = testCube.GetComponent<Renderer>();
-                renderer.material.mainTexture = texture;
-            },
-            useCache: false,
-            width: 256, height: 256
-        ));
-    }
+    //void TestImageAI()
+    //{
+    //    ImageAI imageAI = Misc.GetAddComponent<ImageAI>(gameObject);
+    //
+    //    string prompt = "person on mountain, minimalist 3d";
+    //    Debug.Log("Sending prompt " + prompt);
+    //
+    //    StartCoroutine(
+    //        imageAI.GetImage(prompt, (Texture2D texture) =>
+    //        {
+    //            Debug.Log("Done.");
+    //            Renderer renderer = testCube.GetComponent<Renderer>();
+    //            renderer.material.mainTexture = texture;
+    //        },
+    //        useCache: false,
+    //        width: 256, height: 256
+    //    ));
+    //}
 
     void TestImageAIDallE()
     {
         ImageAIDallE imageAI = Misc.GetAddComponent<ImageAIDallE>(gameObject);
 
-        string prompt = "photo of a bearded, hipster teenager, chained to the in a dark basement with light from above, renaissance oil painting";
+        string prompt = "photo of a bearded, hipster duck, chained to the in a dark basement with light from above, renaissance oil painting";
         Debug.Log("Sending prompt " + prompt);
 
         const int size = 1024;
@@ -134,14 +136,13 @@ namespace Universe
             imageAI.GetImage(prompt, (Texture2D texture) =>
             {
                 Debug.Log("Done.");
-                Renderer renderer = testCube.GetComponent<Renderer>();
                 
-                Color fillColor = new Color(0f, 0f, 0.2f, 0f);
-                ImageFloodFill.FillFromSides(
-                    texture, fillColor,
-                    threshold: 0.075f, contour: 5f, bottomAlignImage: true);
-                
-                renderer.material.mainTexture = texture;
+               //// Color fillColor = new Color(0f, 0f, 0.0f, 0f);
+               // ImageFloodFill.FillFromSides(
+               //     texture, fillColor,
+               //     threshold: 0.075f, contour: 5f, bottomAlignImage: true);
+
+                testCube.GetComponent<RawImage>().texture = texture;
             },
             useCache: true,
             width: size, height: size
